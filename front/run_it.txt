@@ -1,0 +1,3 @@
+nmp install /* Install all the depencies */
+
+npm run
