@@ -1,9 +1,0 @@
-- A really good tutorial for beginners about javascipt with exercise :
-	https://learnjavascript.online/
-
-- How to install a base front from Svelte with SvelteKit :
-	https://kit.svelte.dev/docs/introduction
-
-- Learn svelte with exercise : (really cool).
-	https://svelte.dev/tutorial/
-

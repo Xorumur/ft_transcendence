@@ -1,0 +1,6 @@
+With the command on the documentation of Nestjs we can't install Nestjs because we don't have permissions to acces somes files
+
+So we have to do this :
+	-npm init 
+	-npm i @nestjs/cli 
+	-npx nest new backend
