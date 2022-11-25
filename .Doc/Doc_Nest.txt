@@ -1,0 +1,14 @@
+With the command on the documentation of Nestjs we can't install Nestjs because we don't have permissions to acces somes files
+
+So we have to do this :
+	-npm init 
+	-npm i @nestjs/cli 
+	-npx nest new backend
+
+To set the port for the back wh have to go to the file src/main.ts et changer le port.
+
+All the nest command mus tbe called like this : (we don't have nest command)
+	-nps nest ....
+
+To make communicate the front with the back we will use axios, 
+there is an exemple in routes/test/+page.svelte.

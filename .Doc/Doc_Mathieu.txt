@@ -1,11 +1,13 @@
-import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
+NEST :
 
-@Controller('test')
+Controller:
+exemple:
+
+@Controller(/*p1*/) // p1 == path.
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get()
+  @Get(/*p1/p2*/) // p2 == path.
   getHello(): string {
     return this.appService.getHello();
   }
