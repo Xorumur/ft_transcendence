@@ -1,14 +1,19 @@
 NEST :
 
 Controller:
-exemple:
+EX:
+	@Controller(/*p1*/) // p1 == path.
+	export class AppController {
+	constructor(private readonly appService: AppService) {}
 
-@Controller(/*p1*/) // p1 == path.
-export class AppController {
-  constructor(private readonly appService: AppService) {}
+	@Get(/*p1/p2*/) // p2 == path.
+	getHello(): string {
+		return this.appService.getHello();
+	}
+	}
 
-  @Get(/*p1/p2*/) // p2 == path.
-  getHello(): string {
-    return this.appService.getHello();
-  }
-}
+Axios:
+Permet de faire communiquer le back avec le front.
+Envoie des requettes http au back avec les methodes http (GET, POST, PUT, DELETE...).
+EX: (Recupere le get qui proc sur le controller lier a la route preciser).
+	axios.get("http://localhost:4200/test");

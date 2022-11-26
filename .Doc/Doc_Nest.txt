@@ -1,14 +1,13 @@
-With the command on the documentation of Nestjs we can't install Nestjs because we don't have permissions to acces somes files
-
-So we have to do this :
-	-npm init 
-	-npm i @nestjs/cli 
-	-npx nest new backend
+To run the back you have to:
+	-zero: if it's on a new session and you have nothing installed, you must do npm i to install all the dependencies.
+	-first: (launch docker or ./init_doker.sh)launch the db via ./init_db.sh or make db
+	-second: just make.
 
 To set the port for the back wh have to go to the file src/main.ts et changer le port.
 
 All the nest command mus tbe called like this : (we don't have nest command)
-	-nps nest ....
+	-npx nest ....
 
 To make communicate the front with the back we will use axios, 
-there is an exemple in routes/test/+page.svelte.
+there is an exemple in routes/test/+page.svelte:
+t = await axios.get("http://localhost:4200/test"); || Will proc the GET on the route http://localhost:4200/test.

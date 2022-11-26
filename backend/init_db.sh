@@ -4,7 +4,7 @@
 set -e
 
 SERVER="my_database_server";
-PW="mysecretpassword";
+PW="123456";
 DB="my_database";
 
 echo "echo stop & remove old docker [$SERVER] and starting new fresh instance of [$SERVER]"
@@ -13,7 +13,10 @@ echo "echo stop & remove old docker [$SERVER] and starting new fresh instance of
   docker run --name $SERVER -e POSTGRES_PASSWORD=$PW \
   -e PGPASSWORD=$PW \
   -p 5432:5432 \
-  -d postgres
+  -d postgres \
+#   -v db:/var/lib/postgresql/data
+
+# docker run --link $SERVER:db -p 8080:8080 adminer
 
 # wait for pg to start
 echo "sleep wait for pg-server [$SERVER] to start";

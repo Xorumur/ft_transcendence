@@ -1,4 +1,5 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { User } from '../user/user.entity';
 // import { cli } from '@nestjs/cli';
 
 require('dotenv').config();
@@ -38,9 +39,10 @@ class ConfigService {
 			port: parseInt(this.getValue('POSTGRES_PORT')),
 			username: this.getValue('POSTGRES_USER'),
 			password: this.getValue('POSTGRES_PASSWORD'),
+			// password: 'test',
 			database: this.getValue('POSTGRES_DATABASE'),
 
-			entities: ['**/*.entity{.ts,.js}'],
+			entities: [User],
 
 			migrationsTableName: 'migration',
 

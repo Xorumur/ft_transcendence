@@ -1,2 +1,10 @@
 HOW TO SET UP DB WITH NEST WITH DOCKERFILE: 
 	https://medium.com/@gausmann.simon/nestjs-typeorm-and-postgresql-full-example-development-and-project-setup-working-with-database-c1a2b1b11b8f
+
+Docker for the db :
+	https://hub.docker.com/_/postgres
+
+La db est lancée directement via le script ./init_db.sh avec docker.
+
+Documentation pour typeorm (Ajouter des class):
+	https://typeorm.io
