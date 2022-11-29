@@ -7,7 +7,3 @@ To set the port for the back wh have to go to the file src/main.ts et changer le
 
 All the nest command mus tbe called like this : (we don't have nest command)
 	-npx nest ....
-
-To make communicate the front with the back we will use axios, 
-there is an exemple in routes/test/+page.svelte:
-t = await axios.get("http://localhost:4200/test"); || Will proc the GET on the route http://localhost:4200/test.

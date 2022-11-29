@@ -3,20 +3,23 @@
 #Launch the db via docker
 set -e
 
-SERVER="my_database_server";
+SERVER="mydb";
 PW="123456";
-DB="my_database";
+DB="mydb";
 
 echo "echo stop & remove old docker [$SERVER] and starting new fresh instance of [$SERVER]"
 (docker kill $SERVER || :) && \
   (docker rm $SERVER || :) && \
   docker run --name $SERVER -e POSTGRES_PASSWORD=$PW \
   -e PGPASSWORD=$PW \
+  -e POSTGRES_USER=test1\
+  -e POSTGRES_DB=mydb \
+  -e PGDATA=mydb \
   -p 5432:5432 \
   -d postgres \
 #   -v db:/var/lib/postgresql/data
 
-# docker run --link $SERVER:db -p 8080:8080 adminer
+docker run --link $SERVER:db -p 8080:8080 adminer
 
 # wait for pg to start
 echo "sleep wait for pg-server [$SERVER] to start";

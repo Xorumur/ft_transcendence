@@ -6,5 +6,14 @@ Docker for the db :
 
 La db est lancée directement via le script ./init_db.sh avec docker.
 
+Tuto pour mettre en place db:
+	https://wanago.io/2020/05/18/api-nestjs-postgresql-typeorm/
+
+tuto setup db via Dockerfile : 
+	https://www.baeldung.com/ops/postgresql-docker-setup
+
 Documentation pour typeorm (Ajouter des class):
 	https://typeorm.io
+
+Documentation manipulation db:
+	https://blog.devgenius.io/setting-up-nestjs-with-postgresql-ac2cce9045fe

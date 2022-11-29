@@ -1,0 +1,2 @@
+Official doc api 42:
+	https://api.intra.42.fr/apidoc/guides/getting_started

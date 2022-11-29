@@ -35,12 +35,11 @@ class ConfigService {
 		return {
 			type: 'postgres',
 
-			host: this.getValue('POSTGRES_HOST'),
-			port: parseInt(this.getValue('POSTGRES_PORT')),
-			username: this.getValue('POSTGRES_USER'),
-			password: this.getValue('POSTGRES_PASSWORD'),
-			// password: 'test',
-			database: this.getValue('POSTGRES_DATABASE'),
+			host: 'localhost',
+			port: +'5432',
+			username: 'mlecherb',
+			password: 'test',
+			database: 'mydb',
 
 			entities: [User],
 
@@ -48,6 +47,7 @@ class ConfigService {
 
 			migrations: ['src/migration/*.ts'],
 
+			autoLoadEntities: true,
 			// cli: {
 			// 	migrationsDir: 'src/migration',
 			// },
@@ -66,4 +66,8 @@ const configService = new ConfigService(process.env)
     'POSTGRES_DATABASE'
   ]);
 
+// export class connect {
+
+// }
+  
 export { configService };
