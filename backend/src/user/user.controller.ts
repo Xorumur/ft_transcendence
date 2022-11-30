@@ -6,7 +6,7 @@ import { User } from './user.entity';
 import {CreateUserDto} from './user.dto'
 
 
-@Controller('user')
+@Controller()
 export class UsersController {
 	constructor(private readonly UsersService: UsersService) {}
 
@@ -14,7 +14,7 @@ export class UsersController {
 	getHello(): string {
 		return this.UsersService.getHello();
 	}
-
+	
 	// This is how to get the json body of the request.
 	@Post('new')
 	@UsePipes(ValidationPipe)
