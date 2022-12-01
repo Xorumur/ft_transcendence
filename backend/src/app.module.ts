@@ -10,6 +10,13 @@ import * as Joi from '@hapi/joi';
 import { DatabaseModule } from './data.module';
 import { DataSource } from 'typeorm';
 import { AuthModule } from './authentification/auth.module';
+const express = require('express');
+const cors = require('cors');
+
+const app = express();
+app.get('/google', (req, res) => { res.end('ok'); });
+app.use(cors())
+
 
 @Module({
 	imports: [

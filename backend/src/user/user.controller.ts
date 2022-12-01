@@ -6,7 +6,7 @@ import { User } from './user.entity';
 import {CreateUserDto} from './user.dto'
 
 
-@Controller()
+@Controller('user')
 export class UsersController {
 	constructor(private readonly UsersService: UsersService) {}
 
@@ -25,7 +25,8 @@ export class UsersController {
 		@Body('intra') intra: string
 		) {
 		console.log(id, fN, lN, intra);
-		await this.UsersService.createUser(id, fN, lN, intra);
+		const User = await this.UsersService.createUser(id, fN, lN, intra);
+		console.log('-> User', User);
 	}
 
 	// @Get('db')

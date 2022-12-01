@@ -48,15 +48,15 @@ export class AuthService {
 		})
 		})
 		return await token.json();
-		// token = token.json;
-		console.log('-> token', token);
-		let request = await fetch('https://api.intra.42.fr/v2/me', {
-			method: 'GET',
-			headers: {
-				'Authorization': `Bearer ${token.access_token}`,
-				'Content-Type': 'application/json',
-			},
-		}, 2000);
-		console.log('-> request', request);
+		// // token = token.json;
+		// console.log('-> token', token);
+		// let request = await fetch('https://api.intra.42.fr/v2/me', {
+		// 	method: 'GET',
+		// 	headers: {
+		// 		'Authorization': `Bearer ${token.access_token}`,
+		// 		'Content-Type': 'application/json',
+		// 	},
+		// }, 2000);
+		// console.log('-> request', request);
 	}
 }

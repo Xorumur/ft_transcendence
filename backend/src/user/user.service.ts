@@ -23,10 +23,6 @@ export class UsersService {
 	return this.usersRepository.findOneBy({ intra });
 	}
 
-	// async create(user: User): Promise<User> {
-	// 	return this.usersRepository.save(user);
-	// }
-
 	// async create(createUserDto: CreateUserDto) {
 	// 	const user = new User();
 	// 	user.id = createUserDto.id;
@@ -43,10 +39,24 @@ export class UsersService {
 		intra : string
 		) {
 		// console.log(CreateUserDto);
+		console.log('Contructor : ', id, fN, lN, intra);
 		const newUser: User = new User(id, fN, lN, intra);
 		console.log(newUser);
 		await this.usersRepository.save(newUser);
+		// console.log('-> Display by id ', await this.displayUserId(0));
+		// console.log('-> Display by intra ', await this.displayUserIntra('mlecherb'));
+		// console.log('-> Display all ', await this.findAll());
 		return newUser;
+	}
+
+	async displayUserId(id : number) {
+		const user = await this.usersRepository.findOneBy({ id: id });
+		return user;
+	}
+
+	async displayUserIntra(intra : string) {
+		const user = await this.usersRepository.findOneBy({ intra: intra });
+		return user;
 	}
 
 	async remove(id: string): Promise<void> {
