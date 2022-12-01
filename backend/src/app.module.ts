@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { configService } from './config/config.service';
+// import { configService } from './config/config.service';
 import { User } from './user/user.entity';
 import { UsersModule } from './user/user.module';
 import { ConfigModule } from '@nestjs/config';
@@ -35,7 +35,7 @@ app.use(cors())
 		synchronize: true,
 		autoLoadEntities: true,
 	  }),
-	  DatabaseModule,
+	//   DatabaseModule,
 	  UsersModule,
 	  AuthModule,
 	],

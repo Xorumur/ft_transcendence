@@ -1,7 +1,8 @@
 #env
 .env
 token.env
-
+/data/pg
+/data/pgadmin
 # compiled output
 /dist
 /node_modules
