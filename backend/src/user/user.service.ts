@@ -36,11 +36,13 @@ export class UsersService {
 		id : number, 
 		fN : string, 
 		lN : string, 
-		intra : string
+		intra : string,
+		mail : string,
+		image : string
 		) {
 		// console.log(CreateUserDto);
 		console.log('Contructor : ', id, fN, lN, intra);
-		const newUser: User = new User(id, fN, lN, intra);
+		const newUser: User = new User(id, fN, lN, intra, mail, image);
 		console.log(newUser);
 		await this.usersRepository.save(newUser);
 		// console.log('-> Display by id ', await this.displayUserId(0));

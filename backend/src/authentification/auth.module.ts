@@ -11,8 +11,8 @@ import { HttpService } from '@nestjs/axios';
 import { GoogleModule } from './google_auth/google.module';
 
 @Module({
-	  imports: [HttpModule, GoogleModule],
-	  providers: [AuthService],
+	  imports: [HttpModule, GoogleModule, UsersModule],
+	  providers: [AuthService, UsersService],
 	  controllers: [AuthController],
 	//   exports: [],
 })

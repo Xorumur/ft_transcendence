@@ -34,8 +34,25 @@ export class AuthController {
 				},
 			});
 			let info = await request.json();
-			console.log('-> request', info);
-	}
+			let userId = info.id;
+			let userIntra = info.login;
+			let userMail = info.email;
+			let	userFirstName = info.first_name;
+			let userLastName = info.last_name;
+			let imageUrl = info.image.link;
+			console.log('-> info', info);
+			console.log('-> userId', userId);
+			console.log('-> userIntra', userIntra);
+			console.log('-> userMail', userMail);
+			console.log('-> userFirstName', userFirstName);
+			console.log('-> userLastName', userLastName);
+			console.log('-> imageUrl', imageUrl);
+			// return resp;
+			
+			// console.log('-> request', info);
+			// let userInfo = await this.AuthService.getUserInfo(token);
+			// console.log('-> userInfo', userInfo);
+	}	
 
 	// @Get('db')
 	// getName() : string {

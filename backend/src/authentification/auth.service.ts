@@ -59,4 +59,15 @@ export class AuthService {
 		// }, 2000);
 		// console.log('-> request', request);
 	}
+
+	async getUserInfo(token : string) {
+		let request = await fetch(`https://api.intra.42.fr/v2/users/${token}`, {
+			method: 'GET',
+			headers: {
+				'Authorization': `Bearer ${token}`,
+				'Content-Type': 'application/json',
+			},
+		});
+		return await request.json();
+	}
 }

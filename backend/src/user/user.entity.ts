@@ -15,20 +15,29 @@ export class User {
 	@Column()
 	intra: string
 
+	@Column()
+	mail: string
+
+	@Column()
+	image: string
 	// Profile picture
 	// @Column()
 	// url: string
 
 	constructor(
 		id: number,
-		fN: string,
-		lN: string,
-		intra: string
+		firstName: string,
+		lastName: string,
+		intra: string,
+		mail: string,
+		image: string,
 	  ) {
 		this.id = id;
-		this.firstName = fN;
-		this.lastName = lN;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.intra = intra;
+		this.mail = mail;
+		this.image = image;
 	  }
 }
 
