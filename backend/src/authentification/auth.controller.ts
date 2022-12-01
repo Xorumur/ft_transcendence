@@ -2,7 +2,7 @@ import { Controller, Req, Get, Headers, Post , Body, ValidationPipe, UsePipes} f
 import { get } from 'http';
 import { AuthService } from './auth.service';
 import fetch from 'node-fetch';
-// import { UsersService } from './user.service';
+import { UsersService } from '../user/user.service';
 // import { Request } from 'express';
 // import { User } from './user.entity';
 // import {CreateUserDto} from './user.dto'
@@ -10,7 +10,10 @@ import fetch from 'node-fetch';
 
 @Controller('auth')
 export class AuthController {
-	constructor(private readonly AuthService: AuthService) {}
+	constructor(
+		private readonly AuthService: AuthService,
+		private readonly UserService: UsersService
+		) {}
 
 	
 	// This is how to get the json body of the request.
@@ -34,30 +37,30 @@ export class AuthController {
 				},
 			});
 			let info = await request.json();
-			let userId = info.id;
-			let userIntra = info.login;
-			let userMail = info.email;
-			let	userFirstName = info.first_name;
-			let userLastName = info.last_name;
-			let imageUrl = info.image.link;
-			console.log('-> info', info);
-			console.log('-> userId', userId);
-			console.log('-> userIntra', userIntra);
-			console.log('-> userMail', userMail);
-			console.log('-> userFirstName', userFirstName);
-			console.log('-> userLastName', userLastName);
-			console.log('-> imageUrl', imageUrl);
-			// return resp;
-			
-			// console.log('-> request', info);
-			// let userInfo = await this.AuthService.getUserInfo(token);
-			// console.log('-> userInfo', userInfo);
+			let data = { 
+				UserId : info.id,
+				Intra : info.login,
+				Email : info.email,
+				FirstName : info.first_name,
+				LastName : info.last_name,
+				ImageUrl : info.image_url,
+			}
+			this.UserService.createUser(data.UserId, data.FirstName, data.LastName, data.Intra, data.Email, data.ImageUrl);
+			// let userId = info.id;
+			// let userIntra = info.login;
+			// let userMail = info.email;
+			// let	userFirstName = info.first_name;
+			// let userLastName = info.last_name;
+			// let imageUrl = info.image.link;
+			// return {
+			// 		userId : userId, 
+			// 		userIntra : userIntra, 
+			// 		UserEmail : userMail, 
+			// 		userFirstName: userFirstName, 
+			// 		userLastName : userLastName, 
+			// 		pp : imageUrl
+			// 	};
+			console.log(data);
+			return data;
 	}	
-
-	// @Get('db')
-	// getName() : string {
-	// 	return this.UsersService.findOneByIntra('mlecherb');
-	// }
-
-  
 }

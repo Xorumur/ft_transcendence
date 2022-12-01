@@ -22,10 +22,12 @@ export class UsersController {
 		@Body('id') id : number,
 		@Body('firstName') fN : string,
 		@Body('lastName') lN : string,
-		@Body('intra') intra: string
+		@Body('intra') intra: string,
+		@Body('mail') mail: string,
+		@Body('image') image: string,
 		) {
 		console.log(id, fN, lN, intra);
-		const User = await this.UsersService.createUser(id, fN, lN, intra);
+		const User = await this.UsersService.createUser(id, fN, lN, intra, mail, image);
 		console.log('-> User', User);
 	}
 
