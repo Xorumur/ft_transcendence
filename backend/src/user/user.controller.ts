@@ -9,11 +9,6 @@ import {CreateUserDto} from './user.dto'
 @Controller('user')
 export class UsersController {
 	constructor(private readonly UsersService: UsersService) {}
-
-	@Get('test')
-	getHello(): string {
-		return this.UsersService.getHello();
-	}
 	
 	// This is how to get the json body of the request.
 	@Post('new')
@@ -27,8 +22,15 @@ export class UsersController {
 		@Body('image') image: string,
 		) {
 		console.log(id, fN, lN, intra);
-		const User = await this.UsersService.createUser(id, fN, lN, intra, mail, image);
+		// const User = await this.UsersService.createUser(id, fN, lN, intra, mail, image);
 		console.log('-> User', User);
+	}
+
+	@Get('img')
+	async getImage() {
+		const img = await this.UsersService.getImg(97731);
+		console.log('-> User', User);
+		return User;
 	}
 
 	// @Get('db')

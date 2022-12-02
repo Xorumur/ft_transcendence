@@ -15,13 +15,17 @@ export class UsersService {
 		return this.usersRepository.find();
 	}
 
-	findOne(id: number): Promise<User> {
-		return this.usersRepository.findOneBy({ id });
-	}
+	// findOne(id: number): Promise<User> {
+	// 	return this.usersRepository.findOneBy({ id });
+	// }
 
 	findOneByIntra(intra: string): Promise<User> {
-	return this.usersRepository.findOneBy({ intra });
+		return this.usersRepository.findOneBy({ intra });
 	}
+
+	// findOneByCode(code: string): Promise<User> {
+	// 	return this.usersRepository.findOneBy({ code });
+	// }
 
 	// async create(createUserDto: CreateUserDto) {
 	// 	const user = new User();
@@ -33,16 +37,18 @@ export class UsersService {
 	// }
 	
 	async createUser(
-		id : number, 
+		id : number,
+		CID : number,
 		fN : string, 
 		lN : string, 
 		intra : string,
 		mail : string,
-		image : string
+		image : string,
+		token : string
 		) {
 		// console.log(CreateUserDto);
 		console.log('Contructor : ', id, fN, lN, intra);
-		const newUser: User = new User(id, fN, lN, intra, mail, image);
+		const newUser: User = new User(id, CID, fN, lN, intra, mail, image, token);
 		console.log(newUser);
 		await this.usersRepository.save(newUser);
 		// console.log('-> Display by id ', await this.displayUserId(0));
@@ -51,8 +57,13 @@ export class UsersService {
 		return newUser;
 	}
 
+	async getImg(id : number) {
+		const user = await this.usersRepository.findOneBy({ UserId: id });
+		return user.image;
+	}
+
 	async displayUserId(id : number) {
-		const user = await this.usersRepository.findOneBy({ id: id });
+		const user = await this.usersRepository.findOneBy({ UserId: id });
 		return user;
 	}
 
@@ -63,9 +74,5 @@ export class UsersService {
 
 	async remove(id: string): Promise<void> {
 		await this.usersRepository.delete(id);
-	}
-
-	getHello(): string {
-		return 'Proc';
 	}
 }

@@ -4,7 +4,10 @@ import { Entity, PrimaryGeneratedColumn, Column, UpdateDateColumn, CreateDateCol
 @Entity() 
 export class User {
 	@PrimaryGeneratedColumn()
-    id: number
+    UserId: number
+
+	@Column()
+	ClientId: number
 
     @Column()
     firstName: string
@@ -20,24 +23,28 @@ export class User {
 
 	@Column()
 	image: string
-	// Profile picture
-	// @Column()
-	// url: string
+
+	@Column()
+	token: string
 
 	constructor(
 		id: number,
+		CID: number,
 		firstName: string,
 		lastName: string,
 		intra: string,
 		mail: string,
 		image: string,
+		token: string
 	  ) {
-		this.id = id;
+		this.UserId = id;
+		this.ClientId = CID;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.intra = intra;
 		this.mail = mail;
 		this.image = image;
+		this.token = token; 
 	  }
 }
 

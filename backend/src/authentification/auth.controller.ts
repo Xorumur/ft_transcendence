@@ -1,5 +1,4 @@
 import { Controller, Req, Get, Headers, Post , Body, ValidationPipe, UsePipes} from '@nestjs/common';
-import { get } from 'http';
 import { AuthService } from './auth.service';
 import fetch from 'node-fetch';
 import { UsersService } from '../user/user.service';
@@ -23,9 +22,17 @@ export class AuthController {
 		@Headers() header : any
 		) {
 			console.log('code ->', code);
+
 			// Get the Access token from the 42 API
-			const resp = await this.AuthService.authenticateUser(code, header.host);
-			console.log('resp ->', resp);
+			// let resp;
+			// try {
+			let resp = await this.AuthService.authenticateUser(code, header.host);
+			// }
+			// catch (err) {
+				// console.log(err);
+			// }
+
+
 			let token = resp.access_token;
 
 			// Exemple to how to get the user info from the 42 API
@@ -43,24 +50,12 @@ export class AuthController {
 				Email : info.email,
 				FirstName : info.first_name,
 				LastName : info.last_name,
-				ImageUrl : info.image_url,
+				ImageUrl : info.image.link,
+				token : token,
 			}
-			this.UserService.createUser(data.UserId, data.FirstName, data.LastName, data.Intra, data.Email, data.ImageUrl);
-			// let userId = info.id;
-			// let userIntra = info.login;
-			// let userMail = info.email;
-			// let	userFirstName = info.first_name;
-			// let userLastName = info.last_name;
-			// let imageUrl = info.image.link;
-			// return {
-			// 		userId : userId, 
-			// 		userIntra : userIntra, 
-			// 		UserEmail : userMail, 
-			// 		userFirstName: userFirstName, 
-			// 		userLastName : userLastName, 
-			// 		pp : imageUrl
-			// 	};
 			console.log(data);
-			return data;
+			await this.UserService.createUser(data.UserId, data.UserId, data.FirstName, data.LastName, data.Intra, data.Email, data.ImageUrl, token);
+			console.log('-> token : ', token);
+			return token;
 	}	
 }
