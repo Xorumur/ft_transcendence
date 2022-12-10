@@ -7,20 +7,58 @@
 		color: white;
 		background: darkgray;
 		border-radius: 40px;
+		position: absolute;
+		height: 60px;
+		width: 180px;
+		top: 50%;
+		left: 45%;
+		font-size: 40px;
+		background: rgba(100, 40, 175, 0.1);
+		border: 1px solid #000000;
+		box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	}
+
+	.background {
+		z-index: -1;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		background: #98B2F4;
+	}
+
+	.credits {
+		position: absolute;
+		width: 190px;
+		height: 190px;
+		left: 45%;
+		top: 70%;
+
+		font-family: 'Inter';
+		font-style: normal;
+		font-weight: 100;
+		font-size: 40px;
+		line-height: 48px;
+
+		color: #FFFFFF;
 	}
 </style>
-
-<div>
+<img src="assets/b.jpeg" alt="Login background" class="background"/>
+<div class="background">
 	{#if Signin === true}
 		<button class="intra" on:click={async () => auth()}>
 			Log in
 		</button>
 	{/if}
-
-	<p class="intra">
-		{token}
+	<p class="credits">
+		Made by 
+		mlecherb
+		nferre
+		ydanset
 	</p>
 </div>
+
 
 <script lang="ts">
 	import { onMount } from 'svelte';
@@ -45,12 +83,9 @@
 			// Signin = false to don't show the sign button... After that we can go to another page
 			Signin = false;
 			let tmp : any = await axios.post(Config.API_URL + '/auth', { code: code });
-			// accessToken.subscribe(tmp);
 			console.log(tmp.data);
-			// accessToken.set(tmp.data);
 			localStorage.setItem('access_token', tmp.data.toString());
 			token = localStorage.getItem('access_token');
-			// console.log(accessToken);
 			goto('/home');
 		}
 		else if (localStorage.getItem('access_token')) {

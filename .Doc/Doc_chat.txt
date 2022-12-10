@@ -1,0 +1,3 @@
+Tuto chat NestJs + Postgresql:
+	https://arctype.com/blog/postgres-nestjs/
+	https://gabrieltanner.org/blog/nestjs-realtime-chat/

@@ -1,2 +1,5 @@
 Official doc api 42:
 	https://api.intra.42.fr/apidoc/guides/getting_started
+
+middleware, permet d'execute une fonction avant meme que ca ne rentre dans le controller
+	https://progressivecoder.com/nestjs-middleware-tutorial-learn-nestjs-series-part-5/#:~:text=To%20activate%20a%20middleware%2C%20we,method%20of%20the%20module%20class.

@@ -1,0 +1,6 @@
+Pour le front j'ai vu avec Min, il y a un systeme avec svelte que je trouve insane,
+c'est les modal. Petite doc : 
+	https://svelte.dev/repl/b95ce66b0ef34064a34afc5c0249f313?version=3.53.1https://svelte.dev/repl/b95ce66b0ef34064a34afc5c0249f313?version=3.53.1
+
+Fonctionnalite similaire z-indez, donnez de la profondeur sur des elements:
+	https://developer.mozilla.org/fr/docs/Web/CSS/z-index

@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, UpdateDateColumn, CreateDateColumn } from 'typeorm';
-// import { Entity } from 'typeorm/decorator/entity/Entity';
+
 // Here the class of the user entity.
 @Entity() 
 export class User {
@@ -47,6 +47,3 @@ export class User {
 		this.token = token; 
 	  }
 }
-
-// export default User;
-

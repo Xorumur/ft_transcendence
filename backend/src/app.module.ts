@@ -9,13 +9,17 @@ import { ConfigModule } from '@nestjs/config';
 import * as Joi from '@hapi/joi';
 import { DatabaseModule } from './data.module';
 import { DataSource } from 'typeorm';
-import { AuthModule } from './authentification/auth.module';
-const express = require('express');
-const cors = require('cors');
+import { AuthModule } from './auth/au.module';
+import { NestModule } from '@nestjs/common';
+import { MiddlewareConsumer } from '@nestjs/common';
+import { LoggingMiddleware } from './auth/logging.middleware';
+import { JwtService } from '@nestjs/jwt';
+// const express = require('express');
+// const cors = require('cors');
 
-const app = express();
-app.get('/google', (req, res) => { res.end('ok'); });
-app.use(cors())
+// const app = express();
+// app.get('/google', (req, res) => { res.end('ok'); });
+// app.use(cors())
 
 
 @Module({
@@ -35,14 +39,17 @@ app.use(cors())
 		synchronize: true,
 		autoLoadEntities: true,
 	  }),
-	//   DatabaseModule,
 	  UsersModule,
 	  AuthModule,
 	],
 	controllers: [AppController],
-	providers: [AppService],
-  })
+	providers: [AppService, JwtService],
+})
 
-export class AppModule {
+export class AppModule implements NestModule {
 	constructor(private dataSource: DataSource) {}
-}
+	configure(consumer: MiddlewareConsumer) {
+	  consumer.apply(LoggingMiddleware).forRoutes("/user/img");
+	  consumer.apply(LoggingMiddleware).forRoutes("/user/obj");
+	}
+  }

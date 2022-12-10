@@ -1,42 +1,21 @@
-import { Controller, Get, Post , Body, ValidationPipe, UsePipes} from '@nestjs/common';
-import { get } from 'http';
+import { Controller, Get, Post , Body, ValidationPipe, UsePipes, Req, Res} from '@nestjs/common';
 import { UsersService } from './user.service';
 import { Request } from 'express';
 import { User } from './user.entity';
-import {CreateUserDto} from './user.dto'
-
+import { Repository } from 'typeorm';
 
 @Controller('user')
 export class UsersController {
-	constructor(private readonly UsersService: UsersService) {}
-	
-	// This is how to get the json body of the request.
-	@Post('new')
-	@UsePipes(ValidationPipe)
-	async addUser(
-		@Body('id') id : number,
-		@Body('firstName') fN : string,
-		@Body('lastName') lN : string,
-		@Body('intra') intra: string,
-		@Body('mail') mail: string,
-		@Body('image') image: string,
-		) {
-		console.log(id, fN, lN, intra);
-		// const User = await this.UsersService.createUser(id, fN, lN, intra, mail, image);
-		console.log('-> User', User);
+	constructor(
+		private readonly UsersService: UsersService,
+		) {}
+
+	@Get('obj')
+	async getObj(@Req() req: Request) {
+		console.log('-> req.user', req.user);
+		let user = req.user as User;
+		// res.user = user;
+		console.log('-> user', user);
+		return user;
 	}
-
-	@Get('img')
-	async getImage() {
-		const img = await this.UsersService.getImg(97731);
-		console.log('-> User', User);
-		return User;
-	}
-
-	// @Get('db')
-	// getName() : string {
-	// 	return this.UsersService.findOneByIntra('mlecherb');
-	// }
-
-  
 }
