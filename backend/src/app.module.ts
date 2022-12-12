@@ -7,7 +7,6 @@ import { User } from './user/user.entity';
 import { UsersModule } from './user/user.module';
 import { ConfigModule } from '@nestjs/config';
 import * as Joi from '@hapi/joi';
-import { DatabaseModule } from '../../data.module';
 import { DataSource } from 'typeorm';
 import { AuthModule } from './auth/au.module';
 import { NestModule } from '@nestjs/common';
