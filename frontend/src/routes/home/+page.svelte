@@ -70,7 +70,7 @@
 	<!-- <input type="file" accept="image/*" /> -->
 	<input bind:value={search}/>
 	<button on:click={ async () => Search(search)}> Search </button>
-	<p> {search} </p>
+	<button on:click={ async () => Add()}> Add one fake User </button>
 	<button class="message">
 		Messages
 	</button>
@@ -100,11 +100,19 @@
 
 	async function Search(name : string) {
 		// console.log(search);
-		let info = await axios.get(`http://localhost:4200/user/${name}`, {
+		let info = await axios.get(`http://localhost:4200/user/info/${name}`, {
 			headers : {
 				'Authorization' : 'Bearer ' + localStorage.getItem('access_token')
 			}
 		})
 		console.log('-> info', info.data);
+	}
+
+	async function Add() {
+		let info = await axios.get(`http://localhost:4200/user/fake`, {
+			headers : {
+				'Authorization' : 'Bearer ' + localStorage.getItem('access_token')
+			}
+		})
 	}
 </script>
