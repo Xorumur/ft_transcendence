@@ -7,20 +7,15 @@ import { User } from './user/user.entity';
 import { UsersModule } from './user/user.module';
 import { ConfigModule } from '@nestjs/config';
 import * as Joi from '@hapi/joi';
-import { DatabaseModule } from './data.module';
+import { DatabaseModule } from '../../data.module';
 import { DataSource } from 'typeorm';
 import { AuthModule } from './auth/au.module';
 import { NestModule } from '@nestjs/common';
 import { MiddlewareConsumer } from '@nestjs/common';
 import { LoggingMiddleware } from './auth/logging.middleware';
 import { JwtService } from '@nestjs/jwt';
-// const express = require('express');
-// const cors = require('cors');
-
-// const app = express();
-// app.get('/google', (req, res) => { res.end('ok'); });
-// app.use(cors())
-
+import { Chat } from './chat/chat.entity';
+import { ChatModule } from './chat/chat.module';
 
 @Module({
 	imports: [
@@ -34,6 +29,7 @@ import { JwtService } from '@nestjs/jwt';
 		database: process.env.POSTGRES_DB,
 		entities: [
 		  User,
+		  Chat,
 		],
 		logging: false,
 		synchronize: true,
@@ -41,6 +37,7 @@ import { JwtService } from '@nestjs/jwt';
 	  }),
 	  UsersModule,
 	  AuthModule,
+	  ChatModule,
 	],
 	controllers: [AppController],
 	providers: [AppService, JwtService],
@@ -49,7 +46,8 @@ import { JwtService } from '@nestjs/jwt';
 export class AppModule implements NestModule {
 	constructor(private dataSource: DataSource) {}
 	configure(consumer: MiddlewareConsumer) {
-	  consumer.apply(LoggingMiddleware).forRoutes("/user/img");
-	  consumer.apply(LoggingMiddleware).forRoutes("/user/obj");
+	// If you want to check if the user is logged in, you can use this middleware.
+		consumer.apply(LoggingMiddleware).forRoutes("/user/img");
+		consumer.apply(LoggingMiddleware).forRoutes("/user/obj");
 	}
   }

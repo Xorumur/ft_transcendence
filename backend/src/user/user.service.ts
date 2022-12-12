@@ -19,7 +19,11 @@ export class UsersService {
 	}
 
 	findOneByIntra(intra: string): Promise<User> {
-		return this.usersRepository.findOneBy({ intra });
+		return this.usersRepository.findOneBy({ intra : intra});
+	}
+
+	findOneByOption(option: string, content : string): Promise<User> {
+		return this.usersRepository.findOneBy({firstName: content});
 	}
 
 	async  createUser(

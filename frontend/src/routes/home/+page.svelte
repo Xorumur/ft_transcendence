@@ -67,6 +67,10 @@
 
 <div class="global">
 	<img src={pp} alt="test" class="pp"/>
+	<!-- <input type="file" accept="image/*" /> -->
+	<input bind:value={search}/>
+	<button on:click={ async () => Search(search)}> Search </button>
+	<p> {search} </p>
 	<button class="message">
 		Messages
 	</button>
@@ -79,6 +83,9 @@
 
 	let user : any;
 	let pp : string;
+	let search: string;
+
+
 	onMount(async () => {
 		user = await axios.get('http://localhost:4200/user/obj', {
 			headers : {
@@ -90,4 +97,14 @@
 		else 
 			pp = 'assets/default_pp.jpeg';
 	});
+
+	async function Search(name : string) {
+		// console.log(search);
+		let info = await axios.get(`http://localhost:4200/user/${name}`, {
+			headers : {
+				'Authorization' : 'Bearer ' + localStorage.getItem('access_token')
+			}
+		})
+		console.log('-> info', info.data);
+	}
 </script>

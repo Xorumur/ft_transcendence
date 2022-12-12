@@ -9,5 +9,5 @@ import fetch from 'node-fetch';
 
 @Injectable()
 export class ChatService {
-	constructor(private readonly UserService: UsersService) {}	
+	constructor(private readonly UserService: UsersService) {}
 }
