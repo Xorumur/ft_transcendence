@@ -6,6 +6,7 @@ COPY package.json package-lock.json ./
 
 RUN npm i
 COPY . .
+RUN npm i svelte-routing
 RUN npm run build
 
 CMD npm rebuild esbuild && npm run dev -- --host

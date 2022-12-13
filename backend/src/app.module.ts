@@ -15,6 +15,8 @@ import { LoggingMiddleware } from './auth/logging.middleware';
 import { JwtService } from '@nestjs/jwt';
 import { Chat } from './chat/chat.entity';
 import { ChatModule } from './chat/chat.module';
+import { MatchmakingModule } from './matchmaking/matchmaking.module';
+import { GameModule } from './game/game.module';
 
 @Module({
 	imports: [
@@ -37,6 +39,8 @@ import { ChatModule } from './chat/chat.module';
 	  UsersModule,
 	  AuthModule,
 	  ChatModule,
+	  MatchmakingModule,
+	  GameModule,
 	],
 	controllers: [AppController],
 	providers: [AppService, JwtService],
