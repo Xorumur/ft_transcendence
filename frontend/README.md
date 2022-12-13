@@ -1,6 +1,5 @@
 # How To run the frontend :
-npm i
-npm i svelte-routing
+npm i then npm i svelte-routing
 
 # create-svelte
 
