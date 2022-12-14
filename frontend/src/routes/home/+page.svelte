@@ -2,6 +2,7 @@
 	import { onMount } from "svelte";
 	import axios from "axios";
 	import { navigate } from "svelte-routing";
+	import { goto } from "$app/navigation";
 
 	let user: any;
 	let pp: string;
@@ -42,8 +43,8 @@
 	<input bind:value={search} />
 	<button on:click={async () => Search(search)}> Search </button>
 	<button on:click={async () => Add()}> Add one fake User </button>
+	<button on:click={() => goto("/lobby")}>Play</button>
 	<button class="message"> Messages </button>
-	<button on:click={() => navigate("/lobby")}>Play</button>
 </div>
 
 <style>

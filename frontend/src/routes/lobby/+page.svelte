@@ -1,4 +1,5 @@
 <script>
+    import { goto } from "$app/navigation";
     import io from "socket.io-client";
     import { navigate } from "svelte-routing";
     let isSearching = false;
@@ -22,7 +23,7 @@
     socket.on("matched", (id) => {
         roomId = id;
         socket.disconnect();
-        navigate("/game", { replace: true });
+        goto("/game");
     });
 </script>
 

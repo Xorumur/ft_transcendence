@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { GameGateway } from './game.gateway';
-// import { RoomService } from './game.room';
+import { GameRoomSharedModule } from '../gameRoomShared/gameRoomShared.module';
 
 @Module({
-    // imports: [RoomService],
+    imports: [GameRoomSharedModule],
     providers: [GameGateway]
 })
 export class GameModule { }

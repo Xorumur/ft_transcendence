@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { SubscribeMessage, WebSocketGateway, WebSocketServer } from "@nestjs/websockets";
 import { Server, Socket } from "socket.io";
-import { RoomService } from "./../game/game.room";
+import { GameRoomShared } from "../gameRoomShared/gameRoomShared.room";
 import { v4 } from 'uuid';
 
 @Injectable()
@@ -14,7 +14,7 @@ export class MatchmakingGateway {
     private queue: Socket[] = [];
     @WebSocketServer() server: Server;
 
-    constructor(private readonly roomIdService: RoomService) { }
+    constructor(private readonly roomIdService: GameRoomShared) { }
 
     @SubscribeMessage('connection')
     handleConnection(client: Socket) {
@@ -44,11 +44,10 @@ export class MatchmakingGateway {
             const player1 = this.queue.shift();
             const player2 = this.queue.shift();
             const roomId = v4();
-            player1.join(roomId);
-            player2.join(roomId);
-            this.roomIdService.addRoom(roomId);
-            player1.emit('matched', roomId)
-            player2.emit('matched', roomId)
+            this.roomIdService.addRoom(player1);
+            this.roomIdService.addRoom(player2);
+            player1.emit('matched', roomId);
+            player2.emit('matched', roomId);
         }
     }
 }
