@@ -4,10 +4,7 @@ import { Entity, PrimaryGeneratedColumn, Column, UpdateDateColumn, CreateDateCol
 @Entity() 
 export class User {
 	@PrimaryGeneratedColumn()
-    UserId: number
-
-	@Column()
-	ClientId: number
+    ClientId: number
 
     @Column()
     firstName: string
@@ -28,7 +25,6 @@ export class User {
 	token: string
 
 	constructor(
-		id: number,
 		CID: number,
 		firstName: string,
 		lastName: string,
@@ -37,7 +33,6 @@ export class User {
 		image: string,
 		token: string
 	  ) {
-		this.UserId = id;
 		this.ClientId = CID;
 		this.firstName = firstName;
 		this.lastName = lastName;

@@ -27,7 +27,6 @@ export class UsersService {
 	}
 
 	async  createUser(
-		id : number,
 		CID : number,
 		fN : string, 
 		lN : string,
@@ -36,26 +35,26 @@ export class UsersService {
 		image : string,
 		token : string
 		) {
-		const newUser: User = new User(id, CID, fN, lN, intra, mail, image, token);
+		const newUser: User = new User(CID, fN, lN, intra, mail, image, token);
 		const verifUser = await this.usersRepository.findOneBy({ ClientId: CID });
-		if (verifUser !== undefined)
-		{
-			// delete the user and change it with the verifUser
-			await this.usersRepository.delete(verifUser.UserId);
-		}
+		// if (verifUser !== undefined)
+		// {
+		// 	// delete the user and change it with the verifUser
+		// 	await this.usersRepository.delete(verifUser.ClientId);
+		// }
 		await this.usersRepository.save(newUser);
 		return newUser;
 	}
 
-	async getImg(id : number) {
-		const user = await this.usersRepository.findOneBy({ UserId: id });
-		return user.image;
-	}
+	// async getImg(id : number) {
+	// 	const user = await this.usersRepository.findOneBy({ UserId: id });
+	// 	return user.image;
+	// }
 
-	async displayUserId(id : number) {
-		const user = await this.usersRepository.findOneBy({ UserId: id });
-		return user;
-	}
+	// async displayUserId(id : number) {
+	// 	const user = await this.usersRepository.findOneBy({ UserId: id });
+	// 	return user;
+	// }
 
 	async displayUserIntra(intra : string) {
 		const user = await this.usersRepository.findOneBy({ intra: intra });
