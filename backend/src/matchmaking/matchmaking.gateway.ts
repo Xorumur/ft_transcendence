@@ -44,10 +44,10 @@ export class MatchmakingGateway {
             const player1 = this.queue.shift();
             const player2 = this.queue.shift();
             const roomId = v4();
-            this.roomIdService.addRoom(player1);
-            this.roomIdService.addRoom(player2);
+            this.roomIdService.addRoom(roomId);
             player1.emit('matched', roomId);
             player2.emit('matched', roomId);
         }
     }
+
 }

@@ -1,9 +1,8 @@
 <script>
     import { goto } from "$app/navigation";
+    import { roomId } from "./room";
     import io from "socket.io-client";
-    import { navigate } from "svelte-routing";
     let isSearching = false;
-    let roomId = -1;
     //establish connection with backend using websocket
     const socket = io("localhost:4200", { path: "/matchmaking" });
 
@@ -21,7 +20,7 @@
 
     //detect if player is matched with another
     socket.on("matched", (id) => {
-        roomId = id;
+        roomId.set(id);
         socket.disconnect();
         goto("/game");
     });

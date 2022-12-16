@@ -1,15 +1,14 @@
 import { Injectable } from '@nestjs/common';
-import { Socket } from "socket.io";
 
 @Injectable()
 export class GameRoomShared {
-    private rooms: Socket[] = [];
+    private rooms: string[] = [];
 
-    addRoom(id: Socket): void {
+    addRoom(id: string): void {
         this.rooms.push(id);
     }
 
-    removeRoom(id: Socket): void {
+    removeRoom(id: string): void {
         const index = this.rooms.indexOf(id);
         this.rooms.splice(index, 1);
     }
@@ -18,7 +17,7 @@ export class GameRoomShared {
         return this.rooms;
     }
 
-    shift(): Socket {
+    shift(): string {
         return this.rooms.shift();
     }
 }
