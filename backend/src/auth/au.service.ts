@@ -72,9 +72,9 @@ async getUserInfo(token : string) {
 		ImageUrl : info.image.link,
 		token : token,
 	}
-	console.log('-> data', data);
+	// console.log('-> data', data);
 	await this.usersService.createUser(data.UserId, data.FirstName, data.LastName, data.Intra, data.Email, data.ImageUrl, token);
-	console.log('-> user created', data)
+	// console.log('-> user created', data)
 	return data;
 }
 
@@ -82,7 +82,7 @@ async getUserInfo(token : string) {
 	let response = await this.authenticateUser(code);
 	let token = response.access_token;
 	let user = await this.getUserInfo(token);
-	console.log('-> user', user);
+	// console.log('-> user', user);
 	let jwt = this.jwtService.sign(user);
     return {
       access_token: jwt,

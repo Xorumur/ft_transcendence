@@ -2,12 +2,31 @@
 	import { onMount } from "svelte";
 	import axios from "axios";
 	import { navigate } from "svelte-routing";
+	import { goto } from "$app/navigation";
 
 	let user: any;
 	let pp: string;
 	let search: string;
+	let logged : any;
 
 	onMount(async () => {
+		let logged;
+		if (localStorage.getItem("access_token") === null) {
+			goto("/");
+			return ;
+		}
+			try {
+			logged = await axios.get("http://localhost:4200/user/logged", {
+				headers: {
+					Authorization: "Bearer " + localStorage.getItem("access_token"),
+				},
+		});
+		} catch (error) {
+			console.log("-> error", error);
+			goto("/");
+			return ;
+		}
+
 		user = await axios.get("http://localhost:4200/user/obj", {
 			headers: {
 				Authorization: "Bearer " + localStorage.getItem("access_token"),

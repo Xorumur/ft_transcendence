@@ -26,4 +26,9 @@ export class UsersController {
 		console.log('-> user', user);
 		return user;
 	}
+
+	@Get('logged')
+	async isLogged(@Req() req: Request) {
+		console.log('test');
+	}
 }

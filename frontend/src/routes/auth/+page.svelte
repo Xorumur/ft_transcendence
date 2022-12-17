@@ -46,9 +46,6 @@
     <p class="credits">Made by mlecherb nferre ydanset</p>
 </div>
 
-<!-- <script>
-    import {accessToken} from '../lib/store.js';
-</script> -->
 <style>
     .intra {
         color: white;

@@ -22,7 +22,7 @@ export class AuthController {
 		catch (err) {
 			console.log('-> error', err);
 		}
-		console.log('jwt ->', jwt);
+		// console.log('jwt ->', jwt);
 		return jwt.access_token;
 	}
 }

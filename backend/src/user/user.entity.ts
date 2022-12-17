@@ -31,7 +31,7 @@ export class User {
 		intra: string,
 		mail: string,
 		image: string,
-		token: string
+		token: string,
 	  ) {
 		this.ClientId = CID;
 		this.firstName = firstName;
@@ -39,6 +39,6 @@ export class User {
 		this.intra = intra;
 		this.mail = mail;
 		this.image = image;
-		this.token = token; 
+		this.token = token;
 	  }
 }

@@ -9,8 +9,19 @@ export class LoggingMiddleware implements NestMiddleware {
 		private readonly jwtService: JwtService,
 	) {}
     use(req: Request, res: Response, next: NextFunction) {
+		let payload : any;
 		let token = req.headers.authorization.split(' ')[1];
-		let payload = this.jwtService.verify(token, { secret: jwtConstants.secret });
+		try {
+			payload = this.jwtService.verify(token, { secret: jwtConstants.secret });
+		} catch (e) {
+			res.status(401).send("Unauthorized");
+			return;	
+		}
+		if (payload === undefined || token === undefined) {
+			res.status(401).send("Unauthorized");
+			return;
+		}
+		console.log('-> payload', payload);
 		req.user = payload;
         next();
     }
