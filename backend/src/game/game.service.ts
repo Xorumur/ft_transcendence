@@ -1,4 +1,4 @@
-import { Server, Socket } from 'socket.io';
+import { Server } from 'socket.io';
 import { CustomSocket } from './game.customSocket';
 
 export class Game {
@@ -42,10 +42,10 @@ export class Game {
 		if (client.isPlayer === true) {
 			//check player index to determine which player should move
 			if (client.playerIndex == 1) {
-				this.server.to(client.roomId).emit('playerMove', [y[0], y[1] - 5]);
+				this.server.to(client.roomId).emit('playerMove', [y[0] - 5, y[1]]);
 			}
 			else if (client.playerIndex == 2) {
-				this.server.to(client.roomId).emit('playerMove', [y[0] - 5, y[1]]);
+				this.server.to(client.roomId).emit('playerMove', [y[0], y[1] - 5]);
 			}
 		}
 	}
@@ -55,10 +55,10 @@ export class Game {
 		if (client.isPlayer === true) {
 			//check player index to determine which player should move
 			if (client.playerIndex === 1) {
-				this.server.to(client.roomId).emit('playerMove', [y[0], y[1] + 5]);
+				this.server.to(client.roomId).emit('playerMove', [y[0] + 5, y[1]]);
 			}
 			else if (client.playerIndex === 2) {
-				this.server.to(client.roomId).emit('playerMove', [y[0] + 5, y[1]]);
+				this.server.to(client.roomId).emit('playerMove', [y[0], y[1] + 5]);
 			}
 		}
 	}

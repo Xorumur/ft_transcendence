@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { WebSocketGateway, WebSocketServer, SubscribeMessage, ConnectedSocket } from '@nestjs/websockets';
-import { Server, Socket } from 'socket.io';
-import { GameRoomShared } from '../gameRoomShared/gameRoomShared.room';
+import { Server } from 'socket.io';
 import { Game } from "./game.service"
 import { CustomSocket } from './game.customSocket';
 
@@ -14,21 +13,16 @@ import { CustomSocket } from './game.customSocket';
 export class GameGateway {
 	@WebSocketServer() server: Server;
 	// private game: Game;
-	//array of game objects to be able to handle mutiple games played at the same time
+	//array of game objects to be able to handle mutiple game played at the same time
 	private GameRooms: Game[] = [];
-
-	constructor(private roomIdService: GameRoomShared) { }
-
-	// onModuleInit() {
-	//     this.game = new Game(this.server);
-	// }
 
 	@SubscribeMessage('connection')
 	handleConnection(@ConnectedSocket() client: CustomSocket) {
 		//store roomId in client
 		client.roomId = client.handshake.query.roomId;
-		//Create toom if not existing
+
 		const game = this.GameRooms.find(game => game.getRoomId() === client.roomId)
+		//Create room if not existing
 		if (game) {
 			game.join(client);
 		}
@@ -39,7 +33,7 @@ export class GameGateway {
 
 		//handle disconnections
 		client.on('disconnect', () => {
-			// this.game.removePlayer(client);
+			//need to implement check if both players are dc to erase game
 			console.log('game disocennect');
 		})
 	}
@@ -58,18 +52,21 @@ export class GameGateway {
 		currentGame.down(client, y);
 	}
 
+	//handle ball collision
 	@SubscribeMessage('ballCollision')
 	handleCollison(client: CustomSocket, ball: any) {
 		const currentGame = this.GameRooms.find(game => game.getRoomId() === client.roomId)
 		currentGame.collision(client, ball)
 	}
 
+	//handle score update
 	@SubscribeMessage('score')
 	handleScore(client: CustomSocket, scoreInfo: number) {
 		const currentGame = this.GameRooms.find(game => game.getRoomId() === client.roomId)
 		currentGame.score(client, scoreInfo)
 	}
 
+	//handle mouse mouvement
 	@SubscribeMessage('mouseMove')
 	handleMouseMove(client: CustomSocket, playerInfo: any) {
 		const currentGame = this.GameRooms.find(game => game.getRoomId() === client.roomId)

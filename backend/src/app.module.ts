@@ -17,8 +17,6 @@ import { Chat } from './chat/chat.entity';
 import { ChatModule } from './chat/chat.module';
 import { MatchmakingModule } from './matchmaking/matchmaking.module';
 import { GameModule } from './game/game.module';
-import { GameRoomShared } from './gameRoomShared/gameRoomShared.room';
-import { GameRoomSharedModule } from './gameRoomShared/gameRoomShared.module';
 
 @Module({
 	imports: [
@@ -43,10 +41,9 @@ import { GameRoomSharedModule } from './gameRoomShared/gameRoomShared.module';
 		ChatModule,
 		MatchmakingModule,
 		GameModule,
-		GameRoomSharedModule,
 	],
 	controllers: [AppController],
-	providers: [AppService, JwtService, GameRoomShared],
+	providers: [AppService, JwtService],
 })
 
 export class AppModule implements NestModule {
