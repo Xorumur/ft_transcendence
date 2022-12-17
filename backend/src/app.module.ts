@@ -20,38 +20,38 @@ import { GameModule } from './game/game.module';
 
 @Module({
 	imports: [
-	  ConfigModule.forRoot({ isGlobal: true }),
-	  TypeOrmModule.forRoot({
-		type: 'postgres',
-		host: process.env.POSTGRES_HOST,
-		port: +process.env.POSTGRES_PORT,
-		username: process.env.POSTGRES_USER,
-		password: process.env.POSTGRES_PASSWORD,
-		database: process.env.POSTGRES_DB,
-		entities: [
-		  User,
-		  Chat,
-		],
-		logging: false,
-		synchronize: true,
-		autoLoadEntities: true,
-	  }),
-	  UsersModule,
-	  AuthModule,
-	  ChatModule,
-	  MatchmakingModule,
-	  GameModule,
+		ConfigModule.forRoot({ isGlobal: true }),
+		TypeOrmModule.forRoot({
+			type: 'postgres',
+			host: process.env.POSTGRES_HOST,
+			port: +process.env.POSTGRES_PORT,
+			username: process.env.POSTGRES_USER,
+			password: process.env.POSTGRES_PASSWORD,
+			database: process.env.POSTGRES_DB,
+			entities: [
+				User,
+				Chat,
+			],
+			logging: false,
+			synchronize: true,
+			autoLoadEntities: true,
+		}),
+		UsersModule,
+		AuthModule,
+		ChatModule,
+		MatchmakingModule,
+		GameModule,
 	],
 	controllers: [AppController],
 	providers: [AppService, JwtService],
 })
 
 export class AppModule implements NestModule {
-	constructor(private dataSource: DataSource) {}
+	constructor(private dataSource: DataSource) { }
 	configure(consumer: MiddlewareConsumer) {
 	// If you want to check if the user is logged in, you can use this middleware.
 		consumer.apply(LoggingMiddleware).forRoutes("/user");
 		consumer.apply(LoggingMiddleware).forRoutes("/user/img");
 		consumer.apply(LoggingMiddleware).forRoutes("/user/obj");
 	}
-  }
+}
