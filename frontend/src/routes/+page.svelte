@@ -1,18 +1,3 @@
-<!-- <script>
-	import { Router, Route } from "svelte-routing";
-	import Home from "./home/+page.svelte";
-	import Lobby from "./lobby/+page.svelte";
-	import Game from "./game/+page.svelte";
-	import Auth from "./auth/+page.svelte";
-</script>
-
-<Router>
-	<Route path="home" component={Home} />
-	<Route path="lobby" component={Lobby} />
-	<Route path="game" component={Game} />
-	<Route path="/" component={Auth} />
-	<!-- <Route path="login" component={Auth} />
-</Router> -->
 <script lang="ts">
     import { onMount } from "svelte";
     import { goto } from "$app/navigation";
@@ -26,7 +11,6 @@
 
     function auth() {
         goto(url);
-        // goto('hhtp://localhost:3000');
     }
 
     onMount(async () => {
@@ -47,10 +31,14 @@
             localStorage.setItem("access_token", tmp.data.toString());
             // token = localStorage.getItem("access_token");
             goto("/home");
+			return ;
         }
 		let logged;
 		if (localStorage.getItem("access_token") === null)
 			return ;
+		let token = localStorage.getItem("access_token");
+		if (token === '')
+			localStorage.removeItem("access_token");
 		try {
 			logged = await axios.get("http://localhost:4200/user/logged", {
 				headers: {
@@ -61,6 +49,8 @@
 			console.log("-> error", error);
 			return ;
 		}
+		if (logged !== undefined)
+			goto("/home");
         }
     );
 </script>
