@@ -23,7 +23,6 @@
 	});
 
 	async function Search(name: string) {
-		// console.log(search);
 		let info = await axios.get(`http://localhost:4200/user/info/${name}`, {
 			headers: {
 				Authorization: "Bearer " + localStorage.getItem("access_token"),

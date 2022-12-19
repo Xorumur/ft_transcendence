@@ -24,9 +24,16 @@
             // Signin = false to don't show the sign button... After that we can go to another page
 			console.log("code: " + code);
             Signin = false;
-            let tmp: any = await axios.post(Config.API_URL + "/auth", {
-                code: code,
-            });
+			let tmp: any;
+			try {
+				tmp = await axios.post(Config.API_URL + "/auth", {
+					code: code,
+				});
+			} catch (error) {
+				console.log("-> error", error);
+				Signin = true;
+				return ;
+			}
             console.log(tmp.data);
             localStorage.setItem("access_token", tmp.data.toString());
             // token = localStorage.getItem("access_token");
@@ -37,8 +44,10 @@
 		if (localStorage.getItem("access_token") === null)
 			return ;
 		let token = localStorage.getItem("access_token");
-		if (token === '')
+		if (token === '') {
 			localStorage.removeItem("access_token");
+			return ;
+		}
 		try {
 			logged = await axios.get("http://localhost:4200/user/logged", {
 				headers: {
@@ -58,7 +67,7 @@
 <img src="assets/b.jpeg" alt="Login background" class="background" />
 <div class="background">
     {#if Signin === true}
-        <button class="intra" on:click={async () => auth()}> Log in </button>
+        <button class="intra" on:click={() => goto(url)}> Log in </button>
     {/if}
     <p class="credits">Made by mlecherb nferre ydanset</p>
 </div>

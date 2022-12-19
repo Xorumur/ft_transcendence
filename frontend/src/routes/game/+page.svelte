@@ -2,6 +2,12 @@
 	import Pong from "./pong.svelte";
 	import { roomId } from "../lobby/room";
 	import { goto } from "$app/navigation";
+	import { onMount } from "svelte";
+	import { GuardRoutes } from "$lib/auth";
+
+	onMount(async () => {
+		GuardRoutes();
+	});
 </script>
 
 <!-- <p>This is the game</p> -->

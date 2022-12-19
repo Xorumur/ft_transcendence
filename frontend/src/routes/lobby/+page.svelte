@@ -2,6 +2,13 @@
 	import { goto } from "$app/navigation";
 	import { roomId } from "./room";
 	import io from "socket.io-client";
+	import { onMount } from "svelte";
+	import { GuardRoutes } from "$lib/auth";
+
+	onMount(async () => {
+		GuardRoutes();
+	});
+
 	let isSearching = false;
 	let selectedGameMode = 0;
 	let selectedMap = 0;

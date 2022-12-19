@@ -1,6 +1,7 @@
-import { Controller, Req, Get, Headers, Post, Body, ValidationPipe, UsePipes } from '@nestjs/common';
+import { Controller, Req, Get, Headers, Post, Body, ValidationPipe, UsePipes, Res } from '@nestjs/common';
 import { AuthService } from '../auth/au.service';
 import { JwtService } from '@nestjs/jwt';
+import { throwError } from 'rxjs';
 
 
 @Controller('auth')
@@ -13,7 +14,8 @@ export class AuthController {
 	@Post()
 	async Oauth(
 		@Body('code') code: string,
-		@Headers() header: any
+		@Headers() header: any,
+		@Res() res: any,
 	) {
 		let jwt;
 		try {
@@ -21,6 +23,8 @@ export class AuthController {
 		}
 		catch (err) {
 			console.log('-> error', err);
+			res.status(401).send('Unauthorized');
+			return ;
 		}
 		// console.log('jwt ->', jwt);
 		return jwt.access_token;
