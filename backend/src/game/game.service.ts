@@ -6,6 +6,7 @@ export class Game {
 	// private players: CustomSocket[] = [];
 	private roomId: string | string[];
 	private numberPlayer = 0;
+	private rand: number[] = [Math.random() < 0.5 ? 1 : -1, Math.random() < 0.5 ? 1 : -1];
 
 
 	//get values for the game object + call join for first client
@@ -19,6 +20,7 @@ export class Game {
 	getRoomId(): string | string[] {
 		return this.roomId;
 	}
+
 
 	//function called when new player joins the game, 
 	join(client: CustomSocket) {
@@ -42,10 +44,10 @@ export class Game {
 		if (client.isPlayer === true) {
 			//check player index to determine which player should move
 			if (client.playerIndex == 1) {
-				this.server.to(client.roomId).emit('playerMove', [y[0] - 5, y[1]]);
+				this.server.to(client.roomId).emit('playerMove', [y[0] = 1, y[1]]);
 			}
 			else if (client.playerIndex == 2) {
-				this.server.to(client.roomId).emit('playerMove', [y[0], y[1] - 5]);
+				this.server.to(client.roomId).emit('playerMove', [y[0], y[1] = 1]);
 			}
 		}
 	}
@@ -55,22 +57,26 @@ export class Game {
 		if (client.isPlayer === true) {
 			//check player index to determine which player should move
 			if (client.playerIndex === 1) {
-				this.server.to(client.roomId).emit('playerMove', [y[0] + 5, y[1]]);
+				this.server.to(client.roomId).emit('playerMove', [y[0] = 2, y[1]]);
 			}
 			else if (client.playerIndex === 2) {
-				this.server.to(client.roomId).emit('playerMove', [y[0], y[1] + 5]);
+				this.server.to(client.roomId).emit('playerMove', [y[0], y[1] = 2]);
 			}
 		}
 	}
 
 	collision(client: CustomSocket, ball: any) {
+		let isWall = false;
 		if (ball[1] == "wall") {
-			ball[0].x_vel *= -1;
+			ball[0].y_vel *= -1;
+			isWall = true;
 		}
 		else if (ball[1] == "paddle") {
-			ball[0].y_vel *= -1;
+			ball[0].x_vel *= -1.1;
+			ball[0].y_vel *= 1.1;
 		}
-		this.server.to(client.roomId).emit('collision', ball[0]);
+		this.rand = [Math.random() < 0.5 ? 1 : -1, Math.random() < 0.5 ? 1 : -1];
+		this.server.to(client.roomId).emit('collision', [ball[0], isWall]);
 	}
 
 	score(client: CustomSocket, scoreInfo: any) {
@@ -97,5 +103,31 @@ export class Game {
 			}
 		}
 		this.server.to(client.roomId).emit('playerMove', [playerInfo[1], playerInfo[2]]);
+	}
+
+	keyDown(client: CustomSocket) {
+		if (client.isPlayer === true) {
+			if (client.playerIndex === 1) {
+				this.server.to(this.roomId).emit('Down', 1);
+			}
+			else {
+				this.server.to(this.roomId).emit('Down', 2);
+			}
+		}
+	}
+
+	newBallPos() {
+		this.server.to(this.roomId).emit('ball', this.rand)
+	}
+
+	disconnect(client: CustomSocket) {
+		if (client.isPlayer === true) {
+			this.numberPlayer--;
+		}
+		if (this.numberPlayer === 0) {
+
+			return true;
+		}
+		return false;
 	}
 }
