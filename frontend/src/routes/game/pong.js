@@ -1,7 +1,7 @@
 export class gameInfo {
 	constructor() {
-		this.canvasWidth = 900;
-		this.canvasHeight = 500;
+		this.canvasWidth = window.innerWidth;
+		this.canvasHeight = window.innerHeight;
 		this.width = 900;
 		this.height = 500;
 		this.border = 5;

@@ -61,6 +61,7 @@
 		paddle2 = new paddle(game, false);
 		ball = new Ball(game, rand);
 		context = canvas.getContext("2d");
+		context.scale(canvas.width / game.width, canvas.height / game.height);
 		socket.emit("game start");
 		requestAnimationFrame(draw);
 	});
