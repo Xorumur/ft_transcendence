@@ -10,8 +10,6 @@
 	});
 
 	let isSearching = false;
-	// let selectedGameMode = 0;
-	let selectedMap = 0;
 	let isLocked = false;
 	//establish connection with backend using websocket
 	const socket = io("localhost:4200", { path: "/matchmaking" });
@@ -53,10 +51,10 @@
 	class:selected={$selectedGameMode === 2}
 	on:click={() => selectedGameMode.set(2)}>Ghost mode 👻</button
 >
-<button class:selected={selectedMap === 0} on:click={() => (selectedMap = 0)}
+<button class:selected={$map === 0} on:click={() => map.set(0)}
 	>Boring map</button
 >
-<button class:selected={selectedMap === 1} on:click={() => (selectedMap = 1)}
+<button class:selected={$map === 1} on:click={() => map.set(1)}
 	>Existing map</button
 >
 {#if !isSearching}
