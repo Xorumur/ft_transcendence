@@ -1,9 +1,16 @@
 <script>
 	import { goto } from "$app/navigation";
-	import { roomId } from "./room";
+	import { roomId, gameMode as selectedGameMode, map } from "./room";
 	import io from "socket.io-client";
+	import { onMount } from "svelte";
+	import { GuardRoutes } from "$lib/auth";
+
+	onMount(async () => {
+		GuardRoutes();
+	});
+
 	let isSearching = false;
-	let selectedGameMode = 0;
+	// let selectedGameMode = 0;
 	let selectedMap = 0;
 	let isLocked = false;
 	//establish connection with backend using websocket
@@ -11,14 +18,14 @@
 
 	//join queue
 	function joinQueue() {
-		socket.emit("joinQueue", selectedGameMode);
+		socket.emit("joinQueue", $selectedGameMode);
 		isSearching = !isSearching;
 		isLocked = true;
 	}
 
 	//leave queue
 	function leaveQueue() {
-		socket.emit("leaveQueue", selectedGameMode);
+		socket.emit("leaveQueue", $selectedGameMode);
 		isSearching = !isSearching;
 		isLocked = false;
 	}
@@ -33,18 +40,18 @@
 
 <button
 	disabled={isLocked}
-	class:selected={selectedGameMode === 0}
-	on:click={() => (selectedGameMode = 0)}>Default</button
+	class:selected={$selectedGameMode === 0}
+	on:click={() => selectedGameMode.set(0)}>Default</button
 >
 <button
 	disabled={isLocked}
-	class:selected={selectedGameMode === 1}
-	on:click={() => (selectedGameMode = 1)}>Speed mode ⚡</button
+	class:selected={$selectedGameMode === 1}
+	on:click={() => selectedGameMode.set(1)}>Speed mode ⚡</button
 >
 <button
 	disabled={isLocked}
-	class:selected={selectedGameMode === 2}
-	on:click={() => (selectedGameMode = 2)}>Ghost mode 👻</button
+	class:selected={$selectedGameMode === 2}
+	on:click={() => selectedGameMode.set(2)}>Ghost mode 👻</button
 >
 <button class:selected={selectedMap === 0} on:click={() => (selectedMap = 0)}
 	>Boring map</button
