@@ -4,7 +4,7 @@
 	let t: any;
 	onMount(async () => {
 		console.log("mounted");
-		t = await axios.get("http://localhost:4200/user/obj", {
+		t = await axios.get("http://localhost:4200/user/info", {
 			headers: {
 				Authorization: "Bearer " + localStorage.getItem("access_token"),
 			},
@@ -24,7 +24,7 @@
 				},
 			}
 		);
-		console.log(response);
+		console.log(response.data.history);
 	}
 </script>
 

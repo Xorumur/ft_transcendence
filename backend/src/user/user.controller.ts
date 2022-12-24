@@ -9,7 +9,7 @@ export class UsersController {
 		private readonly UsersService: UsersService,
 	) { }
 
-	@Get('obj')
+	@Get('info')
 	async getObj(@Req() req: Request) {
 		console.log('-> req.user', req.user);
 		let user = req.user as User;
