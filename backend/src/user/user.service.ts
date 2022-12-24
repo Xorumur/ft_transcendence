@@ -74,7 +74,6 @@ export class UsersService {
 		//create new history in user
 		const history = new History(winner, opponent, 0);
 		user.history.push(history);
-		console.log(user.history);
 		await this.usersRepository.save(user);
 		return user;
 	}

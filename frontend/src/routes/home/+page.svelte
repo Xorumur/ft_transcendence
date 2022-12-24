@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { onMount } from "svelte";
 	import axios from "axios";
-	import { navigate } from "svelte-routing";
 	import { goto } from "$app/navigation";
 	import { GuardRoutes } from "$lib/auth";
 
