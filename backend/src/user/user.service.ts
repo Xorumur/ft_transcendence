@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { User, History } from './user.entity';
+import { User } from './user.entity';
+import { History } from './history.entity';
 
 @Injectable()
 export class UsersService {
@@ -66,10 +67,14 @@ export class UsersService {
 	}
 
 	async pushResult(intra: string, opponent: string, winner: string) {
-		const user = await this.usersRepository.findOneBy({ intra: intra });
+		const user = await this.findOneByIntra(intra);
+		if (user.history === undefined) {
+			user.history = [];
+		}
 		//create new history in user
-		const history = new History(opponent, winner);
+		const history = new History(winner, opponent, 0);
 		user.history.push(history);
+		console.log(user.history);
 		await this.usersRepository.save(user);
 		return user;
 	}

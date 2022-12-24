@@ -83,6 +83,7 @@ export class Game {
 		if (scoreInfo[1] == "p1") {
 			if (++scoreInfo[0].p1 == 10) {
 				this.server.to(this.roomId).emit("stopGame");
+
 			}
 		}
 		else {

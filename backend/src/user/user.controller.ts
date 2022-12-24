@@ -21,6 +21,7 @@ export class UsersController {
 	@Post('result')
 	async pushResult(@Req() req: Request, @Body() body: any) {
 		let user = req.user as User;
+		console.log(user);
 		return await this.UsersService.pushResult(user.intra, body.opponent, body.winner);
 	}
 
@@ -28,6 +29,7 @@ export class UsersController {
 	async isLogged(@Req() req: Request) {
 		console.log('test');
 	}
+
 	@Get(':name')
 	async Search(@Param() name: any, @Req() req: Request,) {
 		let opt = name.name;

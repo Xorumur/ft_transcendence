@@ -3,12 +3,12 @@
 	import axios from "axios";
 	import { navigate } from "svelte-routing";
 	import { goto } from "$app/navigation";
-	import { GuardRoutes }  from "$lib/auth"
+	import { GuardRoutes } from "$lib/auth";
 
 	let user: any;
 	let pp: string;
 	let search: string;
-	let logged : any;
+	let logged: any;
 
 	onMount(async () => {
 		GuardRoutes();
@@ -18,7 +18,7 @@
 				Authorization: "Bearer " + localStorage.getItem("access_token"),
 			},
 		});
-		if (user !== undefined) pp = user.data.ImageUrl;
+		if (user !== undefined) pp = user.data.image;
 		else pp = "assets/default_pp.jpeg";
 	});
 

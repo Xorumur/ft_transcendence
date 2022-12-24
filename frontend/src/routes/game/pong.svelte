@@ -3,6 +3,7 @@
 	import { onMount } from "svelte";
 	import io from "socket.io-client";
 	import PostGameLobby from "./postGameLobby.svelte";
+	import axios from "axios";
 
 	export let roomId;
 	/**
@@ -46,7 +47,7 @@
 	let paddle2;
 
 	/**
-	 * @type {CanvasRenderingContext2D | null}
+	 * @type {CanvasRenderingContext2D}
 	 */
 	let context;
 	/**
@@ -57,12 +58,14 @@
 
 	let rand = { x: 1, y: 1 };
 	onMount(() => {
+		//create all elements
 		paddle1 = new paddle(game, true);
 		paddle2 = new paddle(game, false);
 		ball = new Ball(game, rand);
 		context = canvas.getContext("2d");
+
+		//make the game responsive
 		context.scale(canvas.width / game.width, canvas.height / game.height);
-		socket.emit("game start");
 		requestAnimationFrame(draw);
 	});
 

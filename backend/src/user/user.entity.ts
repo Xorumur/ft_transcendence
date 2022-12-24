@@ -1,4 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToMany, CreateDateColumn } from 'typeorm';
+import { History } from './history.entity';
 
 @Entity()
 export class User {
@@ -24,7 +25,7 @@ export class User {
 	token: string
 
 	@OneToMany(type => History, history => history.user)
-	history: History[]
+	history: History[];
 
 	constructor(
 		CID: number,
@@ -42,29 +43,5 @@ export class User {
 		this.mail = mail;
 		this.image = image;
 		this.token = token;
-	}
-}
-
-@Entity()
-export class History {
-	@PrimaryGeneratedColumn()
-	id: number
-
-	@CreateDateColumn()
-	time: Date
-
-	@Column()
-	opponent: string
-
-	@Column()
-	winner: string
-
-	@ManyToOne(type => User, user => user.history)
-	@JoinColumn({ name: 'userId' })
-	user: User
-
-	constructor(opponent: string, winner: string) {
-		this.opponent = opponent;
-		this.winner = winner;
 	}
 }
