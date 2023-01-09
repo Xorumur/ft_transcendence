@@ -25,6 +25,7 @@ export class GameGateway {
 		//Create room if not existing
 		if (game) {
 			game.join(client);
+			game.newBallPos();
 		}
 		else {
 			console.log("new room created");
@@ -33,6 +34,7 @@ export class GameGateway {
 
 		//handle disconnections
 		client.on('disconnect', () => {
+			// game.disconnect(client);
 			//need to implement check if both players are dc to erase game
 			console.log('game disocennect');
 		})
@@ -72,6 +74,18 @@ export class GameGateway {
 		const currentGame = this.GameRooms.find(game => game.getRoomId() === client.roomId)
 		currentGame.mouseMove(client, playerInfo)
 
+	}
+
+	@SubscribeMessage('keyDown')
+	handleKeyDown(client: CustomSocket) {
+		const currentGame = this.GameRooms.find(game => game.getRoomId() === client.roomId)
+		currentGame.keyDown(client);
+	}
+
+	@SubscribeMessage('ball')
+	handleBallPos(client: CustomSocket) {
+		const currentGame = this.GameRooms.find(game => game.getRoomId() === client.roomId)
+		currentGame.newBallPos();
 	}
 
 }

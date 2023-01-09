@@ -49,9 +49,10 @@ import { GameModule } from './game/game.module';
 export class AppModule implements NestModule {
 	constructor(private dataSource: DataSource) { }
 	configure(consumer: MiddlewareConsumer) {
-	// If you want to check if the user is logged in, you can use this middleware.
+		// If you want to check if the user is logged in, you can use this middleware.
 		consumer.apply(LoggingMiddleware).forRoutes("/user");
 		consumer.apply(LoggingMiddleware).forRoutes("/user/img");
 		consumer.apply(LoggingMiddleware).forRoutes("/user/obj");
+		// consumer.apply(LoggingMiddleware).forRoutes("/user/result");
 	}
 }

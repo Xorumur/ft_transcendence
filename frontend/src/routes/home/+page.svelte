@@ -1,25 +1,36 @@
 <script lang="ts">
 	import { onMount } from "svelte";
 	import axios from "axios";
-	import { navigate } from "svelte-routing";
 	import { goto } from "$app/navigation";
-	import { GuardRoutes }  from "$lib/auth"
+	import { GuardRoutes } from "$lib/auth";
+	import { user } from "../user";
 
-	let user: any;
 	let pp: string;
 	let search: string;
-	let logged : any;
+	let logged: any;
 
 	onMount(async () => {
 		GuardRoutes();
 
-		user = await axios.get("http://localhost:4200/user/obj", {
+		// set all information about the user
+		let data = await axios.get("http://localhost:4200/user/info", {
 			headers: {
 				Authorization: "Bearer " + localStorage.getItem("access_token"),
 			},
 		});
-		if (user !== undefined) pp = user.data.ImageUrl;
-		else pp = "assets/default_pp.jpeg";
+		user.set({
+			pseudo: data.data.login,
+			firstName: data.data.first_name,
+			lastName: data.data.last_name,
+			email: data.data.email,
+			image: data.data.image,
+			intra: data.data.intra,
+			socket: null,
+			roomId: -1,
+			gameMode: 0,
+			map: 0,
+		});
+		pp = $user.image;
 	});
 
 	async function Search(name: string) {
@@ -47,6 +58,7 @@
 	<button on:click={async () => Search(search)}> Search </button>
 	<button on:click={async () => Add()}> Add one fake User </button>
 	<button on:click={() => goto("/lobby")}>Play</button>
+	<button on:click={() => goto("/profile")}>Profile</button>
 	<button class="message"> Messages </button>
 </div>
 
