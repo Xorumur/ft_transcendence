@@ -21,11 +21,9 @@
 		if ( urlParams.has("code") && localStorage.getItem("access_token") === null) {
 			const code = urlParams.get("code");
 			try {
-				console.log('ici hola');
 				let tmp: any = await axios.post(Config.API_URL + "/auth", {
 					code: code,
 				});
-				console.log('-> tmp', tmp);
 				localStorage.setItem("access_token", tmp.data.toString());
 			} catch (error) {
 				console.log("-> error", error);

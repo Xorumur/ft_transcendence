@@ -17,7 +17,9 @@ import { JwtStrategy } from './jwt.strategy';
 					secret: jwtConstants.secret,
 				}),
 				],
-	  providers: [AuthService, LocalStrategy, UsersService, JwtStrategy],
+	  providers: [AuthService, 
+		//LocalStrategy, 
+		UsersService, JwtStrategy],
 	  controllers: [AuthController],
 })
 
