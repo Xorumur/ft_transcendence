@@ -13,24 +13,13 @@
 		GuardRoutes();
 
 		// set all information about the user
-		let data = await axios.get("http://localhost:4200/user/info", {
+		let res = await axios.get("http://localhost:4200/user/info", {
 			headers: {
 				Authorization: "Bearer " + localStorage.getItem("access_token"),
 			},
 		});
-		user.set({
-			pseudo: data.data.login,
-			firstName: data.data.first_name,
-			lastName: data.data.last_name,
-			email: data.data.email,
-			image: data.data.image,
-			intra: data.data.intra,
-			socket: null,
-			roomId: -1,
-			gameMode: 0,
-			map: 0,
-		});
-		pp = $user.image;
+		console.log("-> data", res.data);
+		pp = res.data.ImageUrl;
 	});
 
 	async function Search(name: string) {
@@ -83,7 +72,7 @@
 
 		background: rgba(100, 24, 159, 0.35);
 		border: 2px solid rgba(0, 0, 0, 0.35);
-	} */
+	}  */
 
 	.global {
 		position: absolute;

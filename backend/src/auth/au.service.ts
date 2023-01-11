@@ -16,9 +16,9 @@ export class AuthService {
 
 
 	async log42(code : string) {
-		console.log('-> USER_ID',process.env.USER_ID);
-		console.log('-> USER_SECRET',process.env.USER_SECRET);
-		console.log('-> code', code);
+		// console.log('-> USER_ID',process.env.USER_ID);
+		// console.log('-> USER_SECRET',process.env.USER_SECRET);
+		// console.log('-> code', code);
 		const url = 'https://api.intra.42.fr/oauth/token';
 		let token = await fetch(url, {
 			method: 'POST',
@@ -74,41 +74,25 @@ export class AuthService {
 			token : token,
 		}
 		// console.log('-> data', data);
+		let already = await this.usersService.findOne(data.UserId);
+		console.log('-> already', already);
 		await this.usersService.createUser(data.UserId, data.FirstName, data.LastName, data.Intra, data.Email, data.ImageUrl, token);
 		// console.log('-> user created', data)
 		return data;
 	}
 
-//   async login(code : string)  {
-// 	let response = await this.authenticateUser(code);
-// 	let token = response.access_token;
-// 	let user = await this.getUserInfo(token);
-// 	// console.log('-> user', user);
-// 	let jwt;
-// 	try {
-// 		jwt = this.jwtService.sign(user);
-// 	} catch (err) {
-// 		// console.log(err);
-// 		// resp.status(401).send('Unauthorized');
-// 		return null;
-// 	}
-//     return {
-//       access_token: jwt,
-//     };
-//   }
-
 	async auth(code : string, resp : any) {
 		let resp42 = await this.log42(code);
-		console.log('-> resp42', resp42);
+		// console.log('-> resp42', resp42);
 		let token = resp42.access_token;
 		// console.log('-> access', resp42.access_token);
-		console.log('-> token', token);
+		// console.log('-> token', token);
 		if (!token || token === undefined) {
 			resp.status(401).send('Unauthorized');
 			return null;
 		}
 		let user = await this.StoreUser(token);
-		console.log('-> user', user);
+		// console.log('-> user', user);
 		if (!user || user === undefined) {
 			resp.status(401).send('Unauthorized');
 			return null;
@@ -122,7 +106,7 @@ export class AuthService {
 			resp.status(401).send('Unauthorized');
 			return null;
 		}
-		console.log('-> jwt', jwt);
+		// console.log('-> jwt', jwt);
 		return jwt;
 	}
 }

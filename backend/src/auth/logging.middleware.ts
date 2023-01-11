@@ -21,7 +21,7 @@ export class LoggingMiddleware implements NestMiddleware {
 			res.status(401).send("Unauthorized");
 			return;
 		}
-		console.log('-> payload', payload);
+		// console.log('-> payload', payload);
 		req.user = payload;
         next();
     }

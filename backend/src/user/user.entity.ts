@@ -4,6 +4,9 @@ import { History } from './history.entity';
 @Entity()
 export class User {
 	@PrimaryGeneratedColumn()
+	UserId: number
+	
+	@Column()
 	ClientId: number
 
 	@Column()

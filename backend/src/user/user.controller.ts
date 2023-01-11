@@ -25,10 +25,10 @@ export class UsersController {
 		return await this.UsersService.pushResult(user.intra, body.opponent, body.winner);
 	}
 
-	@Get('logged')
-	async isLogged(@Req() req: Request) {
-		console.log('test');
-	}
+	// @Get('logged')
+	// async isLogged(@Req() req: Request) {
+	// 	console.log('test');
+	// }
 
 	@Get(':name')
 	async Search(@Param() name: any, @Req() req: Request,) {

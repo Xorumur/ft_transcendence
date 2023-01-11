@@ -47,16 +47,6 @@ export class UsersService {
 		return newUser;
 	}
 
-	// async getImg(id : number) {
-	// 	const user = await this.usersRepository.findOneBy({ UserId: id });
-	// 	return user.image;
-	// }
-
-	// async displayUserId(id : number) {
-	// 	const user = await this.usersRepository.findOneBy({ UserId: id });
-	// 	return user;
-	// }
-
 	async displayUserIntra(intra: string) {
 		const user = await this.usersRepository.findOneBy({ intra: intra });
 		return user;

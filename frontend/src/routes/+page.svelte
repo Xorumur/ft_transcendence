@@ -42,20 +42,20 @@
 			localStorage.removeItem("access_token");
 			return ;
 		}
-		let log;
-		try {
-			log = await axios.get("http://localhost:4200/user/logged", {
-				headers: {
-					Authorization:
-						"Bearer " + localStorage.getItem("access_token"),
-				},
-			});
-		} catch (error) {
-			console.log("-> error", error);
-			return;
-		}
-		if (log)
-			goto("/home");
+		// let log;
+		// try {
+		// 	log = await axios.get("http://localhost:4200/user/logged", {
+		// 		headers: {
+		// 			Authorization:
+		// 				"Bearer " + localStorage.getItem("access_token"),
+		// 		},
+		// 	});
+		// } catch (error) {
+		// 	console.log("-> error", error);
+		// 	return;
+		// }
+		// if (log)
+		// 	goto("/home");
     });
 </script>
 
